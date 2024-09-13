@@ -1,0 +1,7 @@
+{
+  "name": "Al arco",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
