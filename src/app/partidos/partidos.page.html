@@ -1,0 +1,73 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-button color="success" expand="block">Partidos</ion-button>
+    <ion-button color="tertiary" expand="block">Posicion</ion-button>
+    <ion-button color="secondary" expand="block">Estadistica</ion-button>
+    <ion-button color="warning" expand="block">Jugadores</ion-button>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-segment [scrollable]="true" value="heart">
+        <ion-title>
+          <ion-button color="success" size="small" shape="round">Partidos</ion-button>
+          <ion-button color="tertiary" size="small" shape="round">Posicion</ion-button>
+          <ion-button color="secondary" size="small" shape="round">Estadistica</ion-button>
+          <ion-button color="warning" size="small" shape="round">Jugadores</ion-button>
+        </ion-title>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <p>Fecha: {{ match.fecha }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Hora: {{ match.hora }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Jornada: {{ match.jornada }}</p>
+          </ion-col>
+        </ion-row>
+  
+        <!-- Select Equipo 1 -->
+        <ion-row>
+          <ion-col>
+            <ion-select [(ngModel)]="match.equipo1.nombre" placeholder="Equipo 1">
+              <ion-select-option *ngFor="let team of teams" [value]="team.nombre">
+                {{ team.nombre }}
+              </ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+  
+        <!-- Select Equipo 2 -->
+        <ion-row>
+          <ion-col>
+            <ion-select [(ngModel)]="match.equipo2.nombre" placeholder="Equipo 2">
+              <ion-select-option *ngFor="let team of teams" [value]="team.nombre">
+                {{ team.nombre }}
+              </ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-content>
+  
+</div>

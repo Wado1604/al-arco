@@ -1,0 +1,47 @@
+<ion-content>
+  <div style="padding: 10px" class="center flex-column h-100">
+    <div class="center flex-column mt-auto">
+      <img style="width: 250px;" src="assets/Fuerte.jpeg" />
+    </div>
+
+    <div class="mt-auto flex-column" style="display: flex; gap: 20px;">
+      <ion-input class="custom" label="Correo" label-placement="floating" fill="outline" [(ngModel)]="email"
+        type="email" placeholder="Correo@dominio.com"></ion-input>
+      <!-- Campo Contraseña con icono "ojo" -->
+      <ion-item>
+        <ion-input class="custom" [type]="showPassword ? 'text' : 'password'" label="Contraseña"
+          label-placement="floating" fill="outline" [(ngModel)]="password" placeholder="Contraseña123">
+        </ion-input>
+        <ion-icon [name]="showPassword ? 'eye-off' : 'eye'" slot="end" (click)="togglePasswordVisibility()">
+        </ion-icon>
+      </ion-item>
+
+      <!-- Recordar usuario -->
+      <ion-toggle [(ngModel)]="reemberUser" style="margin: 20px;">Recordar correo</ion-toggle>
+    </div>
+
+
+    <div class="mt-auto center flex-column">
+      <ion-button id="btn-login" (click)="logIn()" style="margin-bottom: 20px;" expand="block" shape="round">
+        Iniciar
+      </ion-button>
+
+      <ion-label (click)="presentAlert()" class="mt-auto center flex-column" color="secondary">
+        <small>Recuperar contaseña</small>
+      </ion-label>
+
+      <div class="social-icons">
+        <ion-icon style="font-size: 30px;" name="logo-facebook"></ion-icon>
+        <ion-icon style="font-size: 30px;" name="logo-whatsapp"></ion-icon>
+        <ion-icon style="font-size: 30px;" name="logo-instagram"></ion-icon>
+      </div>
+    </div>
+
+    <div class="mt-auto center flex-column">
+      <ion-label [routerLink]="['/signup']" class="mt-auto center flex-column" color="secondary">
+        <h1>Registrate</h1>
+      </ion-label>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,50 @@
+ion-back-button {
+  --color: #3880ff;
+  /* Cambia el color de la flecha */
+  --icon-size: 24px;
+  /* Cambia el tamaño del icono */
+}
+
+.centered-text {
+  text-align: center;
+  font-style: italic;
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+ion-input.custom {
+  --border-color: #2196f3
+}
+
+ion-button {
+  --background: linear-gradient(90deg, rgba(3, 169, 244, 1) 0%, rgba(142, 84, 233, 1) 100%);
+  --color: white
+}
+
+
+ion-icon {
+  margin-left: 8px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+ion-item {
+  --padding-start: 0;
+  --padding-top: 5px; /* Ajuste vertical */
+  --padding-bottom: 10px; /* Ajuste vertical */
+}
+
+.custom {
+  font-size: 16px; /* Asegura que el texto dentro del input tenga un tamaño adecuado */
+  padding: 5px 0; /* Ajusta el padding dentro del input */
+}
+
+ion-label {
+  font-size: 10px;
+}
+
+ion-input {
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --min-height: 30px; /* Ajusta la altura mínima para que haya suficiente espacio para la etiqueta */
+}

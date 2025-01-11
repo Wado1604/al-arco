@@ -1,0 +1,66 @@
+<ion-content>
+  <div style="padding: 10px" class="center flex-column h-100">
+    <div class="mt-auto flex-column" style="display: flex; gap: 20px;">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/login"></ion-back-button>
+        </ion-buttons>
+        <div class="center flex-column ">
+          <ion-title>Registrate</ion-title>
+        </div>
+      </ion-toolbar>
+
+      <ion-item>
+        <ion-input class="custom" label-placement="floating" fill="outline" placeholder="Nombre" label="Nombre"
+          [(ngModel)]="name"></ion-input>
+      </ion-item>
+
+      <!-- Campo Correo -->
+      <ion-item>
+        <ion-input class="custom" label-placement="floating" fill="outline" placeholder="Correo@gmail.com"
+          label="Correo Electronico" [(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <!-- Campo Número -->
+      <ion-item>
+        <ion-input class="custom" label-placement="floating" fill="outline" placeholder="Numero"
+          label="Numero Telefonico" [(ngModel)]="number"></ion-input>
+      </ion-item>
+
+      <!-- Campo Contraseña -->
+      <ion-item >
+        <!-- Campo Contraseña -->
+        <ion-input class="custom" [type]="showPassword ? 'text' : 'password'" 
+          label-placement="floating" fill="outline" [(ngModel)]="password" 
+          placeholder="Contraseña" label="Contraseña">
+        </ion-input>
+        <ion-icon [name]="showPassword ? 'eye-off' : 'eye'" 
+          slot="end" (click)="togglePasswordVisibility()">
+        </ion-icon>
+      </ion-item>
+      
+      <ion-item >
+        <!-- Campo Repetir Contraseña -->
+        <ion-input class="custom" [type]="showRepeatPassword ? 'text' : 'password'" 
+          label-placement="floating" fill="outline" [(ngModel)]="repeatPassword" 
+          placeholder="Repetir Contraseña" label="Repetir Contraseña">
+        </ion-input>
+        <ion-icon [name]="showRepeatPassword ? 'eye-off' : 'eye'" 
+          slot="end" (click)="toggleRepeatPasswordVisibility()">
+        </ion-icon>
+      </ion-item>
+      
+
+      <ion-select required="true" interface="popover" [(ngModel)]="typeAccount">
+        <ion-select-option *ngFor="let typeAccount of typeAccountsEnum" [value]="typeAccount.id">{{typeAccount.name}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="mt-auto center flex-column">
+      <ion-button id="btn-signup" (click)="signup()" style="margin-bottom: 20px;" expand="block" shape="round">
+        Registrate
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

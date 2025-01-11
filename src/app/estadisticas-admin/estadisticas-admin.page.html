@@ -1,0 +1,97 @@
+<ion-header>
+  <!-- Menú lateral -->
+  <ion-menu content-id="main-content">
+    <ion-content>
+      <ion-list>
+        <ion-item button>Partidos</ion-item>
+        <ion-item button>Posición</ion-item>
+        <ion-item button>Estadísticas</ion-item>
+        <ion-item button>Jugadores</ion-item>
+        <ion-item button color="dark">Equipos</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Header principal -->
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <!-- Scroll horizontal para botones -->
+    <ion-segment [scrollable]="true" value="heart">
+      <ion-title>
+        <ion-button color="success" size="small" shape="round" routerLink="/admin">Partidos</ion-button>
+        <ion-button color="tertiary" size="small" shape="round" routerLink="/posiciones-admin">Posicion</ion-button>
+        <ion-button color="secondary" size="small" shape="round"
+          routerLink="/estadisticas-admin">Estadistica</ion-button>
+        <ion-button color="warning" size="small" shape="round" routerLink="/jugadores-admin">Jugadores</ion-button>
+        <ion-button color="dark" size="small" shape="round" routerLink="/equipos-admin">Equipos</ion-button>
+      </ion-title>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="scroll-container">
+    <ion-segment [(ngModel)]="selectedCategory" >
+      <ion-segment-button value="goles">Goles</ion-segment-button>
+      <ion-segment-button value="asistencias">Asistencias</ion-segment-button>
+      <ion-segment-button value="amarillas">Tarjetas Amarillas</ion-segment-button>
+      <ion-segment-button value="rojas">Tarjetas Rojas</ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-list *ngIf="selectedCategory === 'goles'">
+    <ion-item *ngFor="let player of playerStats.goles">
+      <ion-avatar slot="start">
+        <img [src]="player.foto" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ player.nombre }}</h2>
+        <p>{{ player.equipo }}</p>
+      </ion-label>
+      <ion-note slot="end" color="primary">{{ player.valor }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="selectedCategory === 'asistencias'">
+    <ion-item *ngFor="let player of playerStats.asistencias">
+      <ion-avatar slot="start">
+        <img [src]="player.foto" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ player.nombre }}</h2>
+        <p>{{ player.equipo }}</p>
+      </ion-label>
+      <ion-note slot="end" color="secondary">{{ player.valor }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="selectedCategory === 'amarillas'">
+    <ion-item *ngFor="let player of playerStats.amarillas">
+      <ion-avatar slot="start">
+        <img [src]="player.foto" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ player.nombre }}</h2>
+        <p>{{ player.equipo }}</p>
+      </ion-label>
+      <ion-note slot="end" color="warning">{{ player.valor }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="selectedCategory === 'rojas'">
+    <ion-item *ngFor="let player of playerStats.rojas">
+      <ion-avatar slot="start">
+        <img [src]="player.foto" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ player.nombre }}</h2>
+        <p>{{ player.equipo }}</p>
+      </ion-label>
+      <ion-note slot="end" color="danger">{{ player.valor }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

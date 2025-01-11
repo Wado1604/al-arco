@@ -1,0 +1,221 @@
+
+  
+/* ========= MENÚ SUPERIOR ========= */
+.menu-buttons ion-button {
+  font-weight: bold;
+  margin: 5px;
+  border-radius: 10px;
+  text-transform: capitalize;
+}
+
+/* ========= MENÚ LATERAL ========= */
+.ion-menu {
+  --width: 200px; /* Ancho del menú */
+}
+
+.ion-item {
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 5px;
+
+  &[color="dark"] {
+    color: #fff;
+    font-weight: bold;
+  }
+}
+
+/* ========= BOTONES CON SCROLL HORIZONTAL ========= */
+.scrollable-buttons {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 5px 0;
+
+  ion-button {
+    margin-right: 8px;
+    flex-shrink: 0; /* Evita que los botones se reduzcan */
+    font-weight: bold;
+    border-radius: 10px;
+    text-transform: capitalize;
+  }
+}
+
+/* ========= TARJETAS DE PARTIDOS ========= */
+.card-container {
+  margin: 15px;
+}
+
+.match-card {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ========= ENCABEZADO DE LA TABLA ========= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding-bottom: 5px;
+  color: #5c2d91; /* Morado */
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: #c19dff; /* Color morado suave */
+  margin-bottom: 10px;
+}
+
+/* ========= FILA DE EQUIPOS ========= */
+.team-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.team-name, .score {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.team-select {
+  flex-grow: 1;
+  margin-left: 10px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.score-input {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  border: none;
+}
+
+.highlighted {
+  background-color: #00bfa5;
+  color: white;
+  border-radius: 5px;
+  padding: 3px 8px;
+  font-size: 14px;
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* ========= TABLA DE PARTIDOS ========= */
+.matches-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Contenedor para fecha, jornada y hora */
+.match-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px; /* Espacio entre los campos */
+}
+
+.team-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.no-matches {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #777;
+}
+
+/* ========= BOTONES ========= */
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  .save-btn {
+    background-color: #8bc34a;
+    color: white;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .trash-icon {
+    font-size: 30px;
+    color: #f44336;
+    cursor: pointer;
+  }
+}
+
+/* ========= FONDO DE CONTENIDO ========= */
+.ion-content {
+  --background: #ffffff;
+}
+
+
+  
+/* Contenedor de la fila con fecha, jornada, hora */
+.match-details {
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos horizontalmente */
+  align-items: center; /* Alinea verticalmente los elementos */
+  margin-bottom: 10px;
+  gap: 10px; /* Agrega un espacio entre los campos */
+}
+
+/* Estilo de cada campo editable */
+/* Estilo para cada campo editable */
+.editable-field {
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width: 120px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.editable-field:focus {
+  outline: none;
+  border-color: #8bc34a;
+}

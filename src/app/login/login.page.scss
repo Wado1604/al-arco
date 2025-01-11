@@ -1,0 +1,90 @@
+.text-button {
+  color: rgb(85, 179, 241);
+  /* Color del texto */
+  cursor: pointer;
+  /* Cambia el cursor al pasar sobre el texto */
+  text-decoration: none;
+  /* Elimina la línea de abajo del texto*/
+  display: inline-block;
+  /* Asegura que el texto se comporte como un botón */
+}
+
+.text-button:hover {
+  color: rgb(204, 234, 10);
+  /* Cambia el color al pasar el cursor */
+}
+
+
+/* Logos de redes sociales*/
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 25px;
+}
+
+.social-icons img {
+  margin: 0 10px;
+}
+
+.social-icon {
+  margin: 0 15px;
+  height: 30px;
+  width: 30px;
+}
+
+.ion-modal {
+  --width: 75%;
+  /* Ajusta el ancho del modal */
+  --height: 100%;
+  /* Ajusta la altura del modal */
+  --max-width: 500px;
+  /* Tamaño máximo del modal */
+  --max-height: 500px;
+  /* Tamaño máximo del modal */
+  --background: rgba(255, 255, 255, 0.9);
+  /* Fondo blanco con opacidad */
+  --backdrop-filter: blur(5px);
+  /* Aplica desenfoque al fondo */
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+ion-item {
+  flex: 5;
+}
+
+ion-button {
+  margin-left: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: flex-end;
+  /* Alinea al fondo */
+  height: 50%;
+  /* Ocupa toda la altura del contenedor */
+}
+
+ion-button {
+  --background: linear-gradient(90deg, rgba(3, 169, 244, 1) 0%, rgba(142, 84, 233, 1) 100%);
+  --color:white
+}
+
+ion-input.custom {
+  --border-color: #2196f3
+}
+
+.centered-text {
+  text-align: center;
+  font-style: italic;
+  margin: 20px 0;
+  font-size: 18px;
+}

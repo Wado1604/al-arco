@@ -1,0 +1,55 @@
+.ion-segment {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    display: flex;
+    justify-content: space-around; /* Espaciado uniforme entre botones */
+    scrollbar-width: none; /* Oculta scrollbar */
+    padding: 5px 0; /* Espaciado vertical */
+    background-color: var(--ion-color-secondary); /* Fondo azul */
+  }
+  
+  .ion-segment-button {
+    min-width: 100px; /* Asegura suficiente espacio para cada botón */
+    white-space: nowrap; /* Evita que el texto se divida en líneas */
+    text-overflow: clip; /* Asegura que el texto no se corte */
+    overflow: visible; /* Muestra todo el texto */
+    font-size: 14px; /* Ajusta tamaño del texto */
+    padding: 0 10px; /* Ajusta espacio interno */
+    margin: 0 5px; /* Espaciado entre botones */
+    border-radius: 20px; /* Forma redonda */
+    background-color: transparent; /* Fondo transparente para botones no seleccionados */
+  }
+
+  /* Botón seleccionado */
+  .ion-segment-button.checked {
+    background-color: #f9c846; /* Fondo amarillo claro */
+  color: var(--ion-color-secondary); /* Texto azul al estar seleccionado */
+  }
+  
+  @media (max-width: 500px) {
+    ion-segment-button {
+      font-size: 10px; /* Tamaño reducido para pantallas pequeñas */
+    }
+  }
+
+  /* Scrollable para contenedor */
+  .scroll-container {
+    display: flex;
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    scrollbar-width: thin; /* Hace que el scrollbar sea más delgado (opcional) */
+  }
+ 
+  .ion-segment {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  
+  .ion-segment-button {
+    min-width: 120px; /* Ancho mínimo de cada botón */
+    flex-shrink: 0; /* Evita que se encojan */
+    text-align: center;
+  }
+
+  

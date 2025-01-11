@@ -1,0 +1,56 @@
+<ion-header>
+  <!-- Menú lateral -->
+  <ion-menu content-id="main-content">
+    <ion-content>
+      <ion-list>
+        <ion-item button>Partidos</ion-item>
+        <ion-item button>Posición</ion-item>
+        <ion-item button>Estadísticas</ion-item>
+        <ion-item button>Jugadores</ion-item>
+        <ion-item button color="dark">Equipos</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Header principal -->
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <!-- Scroll horizontal para botones -->
+    <ion-segment [scrollable]="true" value="heart">
+      <ion-title>
+        <ion-button color="success" size="small" shape="round" routerLink="/admin">Partidos</ion-button>
+        <ion-button color="tertiary" size="small" shape="round" routerLink="/posiciones-admin">Posicion</ion-button>
+        <ion-button color="secondary" size="small" shape="round"
+          routerLink="/estadisticas-admin">Estadistica</ion-button>
+        <ion-button color="warning" size="small" shape="round" routerLink="/jugadores-admin">Jugadores</ion-button>
+        <ion-button color="dark" size="small" shape="round" routerLink="/equipos-admin">Equipos</ion-button>
+      </ion-title>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Grid of players -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let player of players">
+        <div class="player-card">
+          <img [src]="player.image" alt="Imagen del jugador" />
+          <h3>{{ player.name }}</h3>
+          <p>{{ player.position }}</p>
+          <p class="team">{{ player.team }}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Floating Add Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openAddPlayerAlert()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>   
+</ion-content>
