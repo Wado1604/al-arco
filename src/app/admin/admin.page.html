@@ -53,31 +53,31 @@
 
     <hr />
 
-    <!-- Equipo 1 -->
-    <div class="team-row">
-      <img [src]="matchItem.team1Logo" alt="{{ matchItem.team1 }}" class="team-logo" />
-      <!-- Nombre del equipo editable -->
-      <div class="team-name" contenteditable="true" (input)="updateMatchDetails('team1', $event, i)">
-        {{ matchItem.team1 || 'Equipo 1' }}
-      </div>
-      <!-- Puntaje editable -->
-      <div class="score" contenteditable="true" (input)="updateMatchDetails('score1', $event, i)">
-        {{ matchItem.score1 || 0 }}
-      </div>
-    </div>
+   <!-- Equipo 1 -->
+<div class="team-row">
+  <img [src]="matchItem.team1Logo || 'assets/default-team1.png'" alt="{{ matchItem.team1 || 'Equipo 1' }}" class="team-logo" />
+  <!-- Nombre del equipo editable -->
+  <div class="team-name" contenteditable="true" (input)="updateMatchDetails('team1', $event, i)">
+    {{ matchItem.team1 || 'Equipo 1' }}
+  </div>
+  <!-- Puntaje editable -->
+  <div class="score" contenteditable="true" (input)="updateMatchDetails('score1', $event, i)">
+    {{ matchItem.score1 || 0 }}
+  </div>
+</div>
 
-    <!-- Equipo 2 -->
-    <div class="team-row">
-      <img [src]="matchItem.team2Logo" alt="{{ matchItem.team2 }}" class="team-logo" />
-      <!-- Nombre del equipo editable -->
-      <div class="team-name" contenteditable="true" (input)="updateMatchDetails('team2', $event, i)">
-        {{ matchItem.team2 || 'Equipo 2' }}
-      </div>
-      <!-- Puntaje editable -->
-      <div class="score" contenteditable="true" (input)="updateMatchDetails('score2', $event, i)">
-        {{ matchItem.score2 || 0 }}
-      </div>
-    </div>
+<!-- Equipo 2 -->
+<div class="team-row">
+  <img [src]="matchItem.team2Logo || 'assets/default-team2.png'" alt="{{ matchItem.team2 || 'Equipo 2' }}" class="team-logo" />
+  <!-- Nombre del equipo editable -->
+  <div class="team-name" contenteditable="true" (input)="updateMatchDetails('team2', $event, i)">
+    {{ matchItem.team2 || 'Equipo 2' }}
+  </div>
+  <!-- Puntaje editable -->
+  <div class="score" contenteditable="true" (input)="updateMatchDetails('score2', $event, i)">
+    {{ matchItem.score2 || 0 }}
+  </div>
+</div>
 
     <!-- Botones -->
     <div class="buttons-container">
@@ -91,10 +91,10 @@
     No hay partidos agregados.
   </div>
 
-  <!-- Botón flotante para agregar partidos -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openAddMatchAlert()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+ <!-- Botón flotante para agregar partidos -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="openAddMatchAlert()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>

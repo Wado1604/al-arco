@@ -12,56 +12,112 @@ import { Router } from '@angular/router';
 
 export class AdminPage implements OnInit {
 
+  teams: { name: string; logo: string }[] = [];
   alertCtrl: any;
   match: any[] = [];
-  equipos: any[] = [];   // Ahora es un arreglo de partidos
+  equipos = [
+    { nombre: 'Equipo 1', logo: 'assets/logo1.png' },
+    { nombre: 'Equipo 2', logo: 'assets/logo2.png' },
+    { nombre: 'Equipo 3', logo: 'assets/logo3.png' },
+  ];
+  // Ahora es un arreglo de partidos
   isAddMatchModalOpen: boolean | undefined;
 
-  // Actualiza los detalles de un partido cuando se edita un campo
-  updateMatchDetails(field: string, event: any, index: number) {
-    const value = event.target.innerText.trim();
-    this.saveMatchData();
-    this.match[index][field] = value;  // Actualiza el campo correspondiente con el nuevo valor
+  jornada: string = '';
+  fecha: string = '';
+  hora: string = '';
+  equipo1: any = null;
+  equipo2: any = null;
+
+  ngOnInit() {
+    const storedMatches = localStorage.getItem('matches');
+    if (storedMatches) {
+      this.match = JSON.parse(storedMatches); // Recupera los partidos guardados
+    } else {
+      this.match = []; // Si no hay partidos guardados, inicializa un array vacío
+    }
+  
+    const storedTeams = localStorage.getItem('teams');
+    if (storedTeams) {
+      this.teams = JSON.parse(storedTeams); // Recupera los equipos guardados
+    } else {
+      this.teams = []; // Si no hay equipos guardados, inicializa un array vacío
+    }
+    this.cargarPartidos();
+    this.cargarEquipos();
+    this.loadTeams();
+  }
+  loadTeams() {
+    const storedTeams = localStorage.getItem('teams');
+    if (storedTeams) {
+      this.teams = JSON.parse(storedTeams);
+    }
   }
 
-  // Agrega un nuevo partido
-  addMatch(data: any) {
-    // Crear un nuevo partido con datos seleccionados
+  // Cargar partidos desde localStorage
+  cargarPartidos() {
+    const partidosStorage = localStorage.getItem('partidos');
+    this.match = partidosStorage ? JSON.parse(partidosStorage) : [];
+  }
+  
+// Cargar equipos desde localStorage
+cargarEquipos() {
+  const equiposStorage = localStorage.getItem('equipos');
+  if (equiposStorage) {
+    this.equipos = JSON.parse(equiposStorage);
+  }
+}
+
+   // Método para eliminar un partido
+   deleteMatch(index: number) {
+    this.match.splice(index, 1); // Elimina el partido seleccionado
+    this.saveMatchData();
+    console.log('Partido eliminado');
+    // Opcional: Actualizar localStorage
+    localStorage.setItem('matches', JSON.stringify(this.match));
+  }
+
+  // Función para guardar los cambios de un partido
+  saveMatch(index: number) {
+    console.log('Partido guardado:', this.match[index]);
+    this.saveMatchData();
+    // Opcional: Guardar en localStorage si deseas persistencia
+    localStorage.setItem('matches', JSON.stringify(this.match));
+  }
+  
+   // Actualizar detalles de un partido
+   updateMatchDetails(field: string, event: any, index: number) {
+    const value = event.target.innerText.trim();
+    this.match[index][field] = value;
+    this.saveMatchData();
+  }
+
+  // Función para agregar un nuevo partido
+  addMatch(match: any) {
     const newMatch = {
-      team1: data.team1.nombre || 'Equipo 1',
-      team2: data.team2.nombre || 'Equipo 2',
-      team1Logo: data.team1.logo || '', // URL del logo del equipo 1
-      team2Logo: data.team2.logo || '', // URL del logo del equipo 2
-      fecha: data.date || '',
-      hora: data.time || '',
-      jornada: data.jornada || '-',
-      score1: 0,
-      score2: 0,
+      fecha: match.date,
+      jornada: match.jornada,
+      hora: match.time,
+      team1: match.team1.name,  // Asegúrate de tener el nombre del equipo
+      team1Logo: match.team1.logo,  // Asegúrate de tener el logo del equipo
+      team2: match.team2.name,  // Asegúrate de tener el nombre del equipo
+      team2Logo: match.team2.logo,  // Asegúrate de tener el logo del equipo
+      score1: 0,  // Puntaje inicial
+      score2: 0   // Puntaje inicial
     };
 
-    this.match.push(newMatch);
-    this.saveMatchData();
+    if (!this.match) {
+      this.match = [];  // Si no existe el array, inicialízalo
+    }
+
+    this.match.push(newMatch);  // Agregar el nuevo partido al array
+    localStorage.setItem('partidos', JSON.stringify(this.match));  // Guardar el array de partidos en localStorage
+    console.log('Nuevo partido agregado:', newMatch);
   }
 
   ionViewWillEnter() {
     this.cargarEquipos();
     this.cargarPartidos();
-  }
-
-  cargarEquipos() {
-    // Recuperar equipos desde localStorage
-    const equiposStorage = localStorage.getItem('equipos');
-    if (equiposStorage) {
-      this.equipos = JSON.parse(equiposStorage);
-    }
-  }
-
-  cargarPartidos() {
-    // Recuperar partidos desde localStorage
-    const partidosStorage = localStorage.getItem('partidos');
-    if (partidosStorage) {
-      this.match = JSON.parse(partidosStorage);
-    }
   }
 
   // Guarda los partidos en el almacenamiento local
@@ -70,101 +126,76 @@ export class AdminPage implements OnInit {
     localStorage.setItem('partidos', JSON.stringify(this.match));
   }
 
-  // Abre el formulario de agregar partido
-  openAddMatchAlert() {
-    // Opciones dinámicas para equipo 1
-    const team1Options = this.equipos.map((equipo) => ({
-      type: 'radio', // Tipo permitido por AlertInput
-      label: equipo.nombre, // Nombre del equipo
-      value: JSON.stringify({ nombre: equipo.nombre, logo: equipo.logo }), // Valor serializado
-    }));
+   // Método para abrir la alerta para agregar un nuevo partido
+   openAddMatchAlert() {
+    if (!this.teams || this.teams.length === 0) {
+      console.error('No hay equipos disponibles.');
+      return; // Salir si no hay equipos disponibles
+    }
   
-    // Opciones dinámicas para equipo 2
-    const team2Options = this.equipos.map((equipo) => ({
-      type: 'radio', // Tipo permitido por AlertInput
-      label: equipo.nombre, // Nombre del equipo
-      value: JSON.stringify({ nombre: equipo.nombre, logo: equipo.logo }), // Valor serializado
-    }));
-  
-    // Crear el alert
     const alert = document.createElement('ion-alert');
     alert.header = 'Agregar Partido';
   
-    // Inputs fijos para Jornada, Fecha y Hora
     alert.inputs = [
       { type: 'text', name: 'jornada', placeholder: 'Jornada' },
       { type: 'date', name: 'date', placeholder: 'Fecha' },
       { type: 'time', name: 'time', placeholder: 'Hora' },
-      // Etiqueta para Equipo 1
-      { type: 'radio', label: 'Selecciona el Equipo 1', value: '', disabled: true },
-      ...team1Options.map((option, index) => ({
-        ...option,
-        name: 'team1', // Grupo de selección para equipo 1
-        checked: index === 0, // Primer equipo seleccionado por defecto
-      })),
-      // Etiqueta para Equipo 2
-      { type: 'radio', label: 'Selecciona el Equipo 2', value: '', disabled: true },
-      ...team2Options.map((option, index) => ({
-        ...option,
-        name: 'team2', // Grupo de selección para equipo 2
-        checked: index === 0, // Primer equipo seleccionado por defecto
-      })),
-    ] as AlertInput[]; // Forzar el tipo para cumplir con AlertInput
+      {
+        name: 'team1',
+        type: 'text',
+        placeholder: 'Seleccionar Equipo 1',
+        value: this.teams[0]?.name || '', // Valor por defecto si hay equipos
+        label: 'Equipo 1',
+      },
+      {
+        name: 'team2',
+        type: 'text',
+        placeholder: 'Seleccionar Equipo 2',
+        value: this.teams[1]?.name || '', // Valor por defecto si hay equipos
+        label: 'Equipo 2',
+      },
+    ];
   
-    // Botones del alert
     alert.buttons = [
       { text: 'Cancelar', role: 'cancel' },
       {
         text: 'Agregar',
         handler: (data) => {
-          // Validar que se hayan seleccionado ambos equipos
-          if (!data.team1 || !data.team2) {
-            console.error('Por favor selecciona ambos equipos.');
-            return false; // Cancela el submit del alert
+          const team1 = this.teams.find((e: { name: string }) => e.name === data.team1);
+          const team2 = this.teams.find((e: { name: string }) => e.name === data.team2);
+  
+          if (!team1 || !team2) {
+            console.error('Por favor selecciona equipos válidos.');
+            return false; // Cancela la acción si no se seleccionan equipos válidos
           }
   
-          // Deserializar datos seleccionados
-          const team1 = JSON.parse(data.team1);
-          const team2 = JSON.parse(data.team2);
+          if (!data.date || !data.time || !data.jornada) {
+            console.error('Por favor completa todos los campos.');
+            return false;
+          }
   
-          // Procesar los datos ingresados
+          // Agregar el partido
           this.addMatch({
-            team1: team1.nombre,
-            team2: team2.nombre,
+            team1,
+            team2,
             date: data.date,
             time: data.time,
             jornada: data.jornada,
-            team1Logo: team1.logo,
-            team2Logo: team2.logo,
           });
-          return true; // Retorno exitoso
+  
+          // Cerrar la alerta después de agregar el partido
+          alert.dismiss();
+  
+          return true;
         },
       },
     ];
   
-    // Mostrar el alert
     document.body.appendChild(alert);
-    return alert.present();
+    alert.present();
   }
   
   
-  // Función para guardar los cambios de un partido
-  saveMatch(index: number) {
-    console.log('Guardando partido', this.match[index]);
-    this.saveMatchData();  // Guarda los datos en el almacenamiento
-  }
-
-  // Función para eliminar un partido
-  deleteMatch(index: number) {
-    this.match.splice(index, 1);  // Elimina el partido del array
-    this.saveMatchData();  // Guarda los cambios
-  }
-
-  ngOnInit() {
-    const storedMatches = localStorage.getItem('matches');
-    this.match = storedMatches ? JSON.parse(storedMatches) : [];
-  }
-
   constructor(private alertController: AlertController, private router: Router) {}
 
 
